@@ -1,5 +1,10 @@
 package br.com.alessanderleite.servletangular.dao;
 
-public interface EmployeeDAO {
+import java.util.List;
 
+import br.com.alessanderleite.servletangular.beans.Employee;
+
+public interface EmployeeDAO {
+	
+	List<Employee> findAll();
 }
