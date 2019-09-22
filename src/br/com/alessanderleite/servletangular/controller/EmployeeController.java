@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import br.com.alessanderleite.servletangular.beans.Employee;
 import br.com.alessanderleite.servletangular.service.EmployeeService;
 import br.com.alessanderleite.servletangular.service.EmployeeServiceImpl;
@@ -31,9 +33,13 @@ public class EmployeeController extends HttpServlet {
 	
 		List<Employee> list = employeeService.findAll();
 		PrintWriter out = resp.getWriter();
+		resp.setContentType("application/json");
+		
+		Gson gson = new Gson();
 		if (list.size() > 0) {
+			String jsonData = gson.toJson(list);
 			
-			out.print(list);
+			out.print(jsonData);
 		}
 		out.close();
 	}

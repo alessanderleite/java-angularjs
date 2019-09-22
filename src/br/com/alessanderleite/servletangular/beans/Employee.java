@@ -1,4 +1,4 @@
-package br.com.alessanderleite.servletangular.beans;
+	package br.com.alessanderleite.servletangular.beans;
 
 public class Employee {
 
