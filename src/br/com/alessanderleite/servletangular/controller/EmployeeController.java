@@ -38,7 +38,7 @@ public class EmployeeController extends HttpServlet {
 		Gson gson = new Gson();
 		if (list.size() > 0) {
 			String jsonData = gson.toJson(list);
-			
+	
 			out.print(jsonData);
 		}
 		out.close();
