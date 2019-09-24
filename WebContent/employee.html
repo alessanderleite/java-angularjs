@@ -12,6 +12,7 @@ var app=angular.module("employeeApp",[]);
 
 app.controller("employeeController",function($scope,$http){
 	
+	$scope.searchText="";
 	$http({
 		url:'EmployeeController',
 		method:"GET",
@@ -23,29 +24,40 @@ app.controller("employeeController",function($scope,$http){
 	},function(response){
 		console.log(response);
 	});
+	$scope.search=function(emp){
+		var id=emp.empId.toString();
+		
+		if(id.includes($scope.searchText)||emp.name.toLowerCase().includes($scope.searchText.toLowerCase())){
+			return true;
+		}
+		return false;
+	}
 });
 
 </script>
 
 </head>
 <body ng-app="employeeApp" ng-controller="employeeController">
-	<h1 align="center">Servlet Angular JS Integration</h1>
-	<hr/>
-	<table>
-		<tr>
-			<th>EmpID</th>
-			<th>Name</th>
-			<th>Address</th>
-			<th>Designation</th>
-			<th>Salary</th>
-		</tr>
-		<tr ng-repeat="emp in employeeList">
-			<td>{{emp.empId}}</td>
-			<td>{{emp.name}}</td>
-			<td>{{emp.address}}</td>
-			<td>{{emp.designation}}</td>
-			<td>{{emp.salary}}</td>
-		</tr>
-	</table>
+	<div class="container">
+		<h1 align="center">Servlet Angular JS Integration</h1>
+		<hr/>
+		<input type="text" ng-model="searchText" placeholder="Search" class="form-control"/>
+		<table class="table table-bordered">
+			<tr>
+				<th>EmpID</th>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Designation</th>
+				<th>Salary</th>
+			</tr>
+			<tr ng-repeat="emp in employeeList | filter:{empId:searchText}" >
+				<td>{{emp.empId}}</td>
+				<td>{{emp.name}}</td>
+				<td>{{emp.address}}</td>
+				<td>{{emp.designation}}</td>
+				<td>{{emp.salary}}</td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
